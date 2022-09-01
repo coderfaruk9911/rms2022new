@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\{UserManagementController,SupplierController,
-    ExpenseInvoiceController};
+    ExpenseInvoiceController,StockProductListController};
 use App\Http\Controllers\test\Testcontroller;
 
 
@@ -51,6 +51,17 @@ use App\Http\Controllers\test\Testcontroller;
     Route::get('/edit/{id}', [ExpenseInvoiceController::class, 'edit'])->name('expense_invoice.edit');
     Route::post('/update/{id}', [ExpenseInvoiceController::class, 'update'])->name('expense_invoice.update');
     Route::get('/delete/{id}', [ExpenseInvoiceController::class, 'delete'])->name('expense_invoice.delete');
+    });
+
+    /************************************************************
+     ***          Expense Invoice Route Are Here              ***
+     ************************************************************/
+    Route::prefix('stock-product-list')->middleware('auth')->group(function () {
+    Route::get('/view', [StockProductListController::class, 'view'])->name('stock_product_list.view');
+    Route::post('/store', [StockProductListController::class, 'store'])->name('stock_product_list.store');
+    Route::get('/edit/{id}', [StockProductListController::class, 'edit'])->name('stock_product_list.edit');
+    Route::post('/update/{id}', [StockProductListController::class, 'update'])->name('stock_product_list.update');
+    Route::get('/delete/{id}', [StockProductListController::class, 'delete'])->name('stock_product_list.delete');
     });
     
 

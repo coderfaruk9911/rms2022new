@@ -66,7 +66,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('stock_product_list.view')}}" class="nav-link">
                   <i class="fa fa-eye nav-icon"></i>
                   <p>Product List</p>
                 </a>
