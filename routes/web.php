@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\{UserManagementController,SupplierController};
+use App\Http\Controllers\admin\{UserManagementController,SupplierController,
+    ExpenseInvoiceController};
 use App\Http\Controllers\test\Testcontroller;
 
 
@@ -40,4 +41,16 @@ use App\Http\Controllers\test\Testcontroller;
     Route::post('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
     Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
     });
+
+    /************************************************************
+     ***          Expense Invoice Route Are Here              ***
+     ************************************************************/
+    Route::prefix('expense-invoice')->middleware('auth')->group(function () {
+    Route::get('/view', [ExpenseInvoiceController::class, 'view'])->name('expense_invoice.view');
+    Route::post('/store', [ExpenseInvoiceController::class, 'store'])->name('expense_invoice.store');
+    Route::get('/edit/{id}', [ExpenseInvoiceController::class, 'edit'])->name('expense_invoice.edit');
+    Route::post('/update/{id}', [ExpenseInvoiceController::class, 'update'])->name('expense_invoice.update');
+    Route::get('/delete/{id}', [ExpenseInvoiceController::class, 'delete'])->name('expense_invoice.delete');
+    });
+    
 

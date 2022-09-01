@@ -64,12 +64,21 @@
                   <p>Supplier List</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="fa fa-eye nav-icon"></i>
-                  <p>Menu 2</p>
+                  <p>Product List</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{route('expense_invoice.view')}}" class="nav-link">
+                  <i class="fa fa-eye nav-icon"></i>
+                  <p>Invoice List View</p>
+                </a>
+              </li>
+
             </ul>
           </li>
           @endif
