@@ -17,9 +17,6 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->string('invoice_number')->unique();
             $table->string('invoice_date');
-            $table->string('product_name');
-            $table->string('quantity');
-            $table->string('unit');
             $table->string('total_amount');
             $table->string('paid_amount');
             $table->string('due_amount');

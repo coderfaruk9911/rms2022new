@@ -56,7 +56,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="invoice_number">Invoice Number</label>
-                                <input type="text" readonly id="invoice_number" name="invoice_number" value="000001" class="form-control">
+                                <input type="text" readonly id="invoice_number" name="invoice_number" value="{{$invoice_number}}" class="form-control">
                                 </div>
                         </div>
                         <div class="col-md-6">
@@ -87,8 +87,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="quantity">Unit Price</label>
-                                            <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                            <label for="unit_price">Unit Price</label>
+                                            <input type="text" id="unit_price" name="unit_price[]" value="{{old('unit_price')}}" class="form-control">
                                         </div>  
                                     </div>
 
@@ -100,8 +100,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="quantity">Price</label>
-                                            <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                            <label for="price">Price</label>
+                                            <input type="text" id="price" name="price[]" value="{{old('price')}}" class="form-control">
                                         </div>  
                                     </div>
 
@@ -136,7 +136,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputprice">Total Amount</label>
-                                    <input type="text" name="total_amount[]" value="{{old('total_amount')}}" id="inputprice" class="form-control">
+                                    <input type="text" name="total_amount" value="{{old('total_amount')}}" id="inputprice" class="form-control">
                                     </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -145,7 +145,7 @@
                             <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paid_amount">Paid Amount</label>
-                                        <input type="text" name="paid_amount[]" value="{{old('paid_amount')}}" id="paid_amount" class="form-control">
+                                        <input type="text" name="paid_amount" value="{{old('paid_amount')}}" id="paid_amount" class="form-control">
                                     </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -154,7 +154,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputprice">Due Amount</label>
-                                    <input type="text" name="due_amount[]" value="{{old('due_amount')}}" id="inputprice" class="form-control">
+                                    <input type="text" name="due_amount" value="{{old('due_amount')}}" id="inputprice" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -201,21 +201,21 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="quantity">Unit Price</label>
-                                <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                <label for="unit_price">Unit Price</label>
+                                <input type="text" id="unit_price" name="unit_price[]" value="{{old('unit_price')}}" class="form-control">
                             </div>  
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="quantity">Unit</label>
+                                <label for="unit">Unit</label>
                                 <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
                             </div>  
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="quantity">Price</label>
-                                <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                <label for="price">Price</label>
+                                <input type="text" id="price" name="price[]" value="{{old('price')}}" class="form-control">
                             </div>  
                         </div>
 
