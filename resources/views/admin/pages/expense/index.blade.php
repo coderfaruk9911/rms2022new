@@ -48,7 +48,7 @@
 
             <div class="card">
               <div class="card-header">
-                <a href="#" data-toggle="modal" data-target="#modal-default" class="btn btn-primary float-right">Add New Invoice </a>
+                <a href="{{route('expense_invoice.add_form')}}"   class="btn btn-primary float-right">Add New Invoice </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -100,66 +100,7 @@
 
 
 
-  <!-- modal-dialog -->
-  <div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Add New Invoice</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
 
-        <form action="{{route('expense_invoice.store')}}" method="post">
-            @csrf
-        <div class="modal-body">
-          
-            <div class="card-body">
-                <div class="form-group">
-                  <label for="inputPackage">Product Name</label>
-                  <input type="text" id="inputPackage" name="product_name" value="{{old('product_name')}}" class="form-control" >
-                </div>
-
-                <div class="form-group">
-                  <label for="invoice_date">Invoice Date</label>
-                  <input type="date" id="invoice_date" name="invoice_date" value='{{old('invoice_date')}}' class="form-control">
-                </div>
-                
-                <div class="form-group">
-                  <label for="inputprice">Total Amount</label>
-                  <input type="text" name="total_amount" value='{{old('total_amount')}}' id="inputprice" class="form-control">
-                </div>
-                <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="paid_amount">Paid Amount</label>
-                        <input type="text" name="paid_amount" value='{{old('paid_amount')}}' id="paid_amount" class="form-control">
-                      </div>
-                      
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputprice">Due Amount</label>
-                        <input type="text" name="due_amount" value='{{old('due_amount')}}' id="inputprice" class="form-control">
-                      </div>
-                </div>
-            </div>
-                
-              </div>
-            
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </form>
-
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
 
 @endsection
 @endif

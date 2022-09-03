@@ -47,6 +47,7 @@ use App\Http\Controllers\test\Testcontroller;
      ************************************************************/
     Route::prefix('expense-invoice')->middleware('auth')->group(function () {
     Route::get('/view', [ExpenseInvoiceController::class, 'view'])->name('expense_invoice.view');
+    Route::get('/add_form', [ExpenseInvoiceController::class, 'addForm'])->name('expense_invoice.add_form');
     Route::post('/store', [ExpenseInvoiceController::class, 'store'])->name('expense_invoice.store');
     Route::get('/edit/{id}', [ExpenseInvoiceController::class, 'edit'])->name('expense_invoice.edit');
     Route::post('/update/{id}', [ExpenseInvoiceController::class, 'update'])->name('expense_invoice.update');

@@ -14,6 +14,10 @@ class ExpenseInvoiceController extends Controller
         return view('admin.pages.expense.index',compact('ExpenseList'));
     }
 
+    public function addForm(){
+        return view('admin.pages.expense.add_form');
+    }
+
 
     public function store(Request $request){
         $validated = $request->validate([
