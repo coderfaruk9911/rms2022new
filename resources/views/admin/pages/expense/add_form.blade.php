@@ -87,21 +87,21 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="unit_price">Unit Price</label>
-                                            <input type="text" id="unit_price" name="unit_price[]" value="{{old('unit_price')}}" class="form-control">
+                                            <label for="rate">Unit Price</label>
+                                            <input type="text" id="rate" name="unit_price[]"  class="form-control rate">
                                         </div>  
                                     </div>
 
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="quantity">Unit</label>
-                                            <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                            <label for="box">Unit</label>
+                                            <input type="text" id="box" name="unit[]"  class="form-control box">
                                         </div>  
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="price">Price</label>
-                                            <input type="text" id="price" name="price[]" value="{{old('price')}}" class="form-control">
+                                            <label for="amount">Price</label>
+                                            <input type="text" id="amount" name="price[]" class="form-control qty1 amount">
                                         </div>  
                                     </div>
 
@@ -136,7 +136,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputprice">Total Amount</label>
-                                    <input type="text" name="total_amount" value="{{old('total_amount')}}" id="inputprice" class="form-control">
+                                    <input type="text" name="total_amount" id="inputprice" class="form-control total">
                                     </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -145,7 +145,7 @@
                             <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paid_amount">Paid Amount</label>
-                                        <input type="text" name="paid_amount" value="{{old('paid_amount')}}" id="paid_amount" class="form-control">
+                                        <input type="text" name="paid_amount" id="paid_amount" class="form-control">
                                     </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -154,7 +154,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputprice">Due Amount</label>
-                                    <input type="text" name="due_amount" value="{{old('due_amount')}}" id="inputprice" class="form-control">
+                                    <input type="text" name="due_amount" id="inputprice" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -201,21 +201,21 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="unit_price">Unit Price</label>
-                                <input type="text" id="unit_price" name="unit_price[]" value="{{old('unit_price')}}" class="form-control">
+                                <label for="rate">Unit Price</label>
+                                <input type="text" id="rate" name="unit_price[]" class="form-control rate">
                             </div>  
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="unit">Unit</label>
-                                <input type="text" id="unit" name="unit[]" value="{{old('unit')}}" class="form-control">
+                                <input type="text" id="box" name="unit[]"  class="form-control box">
                             </div>  
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" id="price" name="price[]" value="{{old('price')}}" class="form-control">
+                                <input type="text" id="amount" name="price[]" value="{{old('price')}}" class="form-control qty1 amount">
                             </div>  
                         </div>
 
@@ -266,8 +266,61 @@
             $(this).closest("#delete_whole_extra_item_add").remove();
             counter -=1;
         });
+
+    //     // Unit price multiply and send data to  price
+
+    $('.rate, .box').on('input',function(){
+    var rate = parseFloat($('.rate').val()) || 0;
+    var box = parseFloat($('.box').val()) || 0;
+
+    $('.amount').val(rate * box);  
+
+
+    // $(document).on("change", ".qty1", function() {
+    //         event.preventDefault();
+    //         var sum = 0;
+    //         $(".qty1").each(function(){
+    //             sum += +$(this).val();
+    //         });
+    //         $(".total").val(sum);
+    //     });
+});
+        
+
+
+        // send data price to total price
+        // $(document).on("change", ".qty1", function() {
+        //     event.preventDefault();
+        //     var sum = 0;
+        //     $(".qty1").each(function(){
+        //         sum += +$(this).val();
+        //     });
+        //     $(".total").val(sum);
+        // });
+
+
+
     });
+
+
   </script>
+
+
+
+
+
+
+
+  {{-- <script>
+    $(document).ready(function(){
+    $('.a1').keyup(calculate);
+    $('.a2').keyup(calculate);
+});
+function calculate(e)
+{
+    $('.a3').val($('.a1').val() * $('.a2').val());
+}
+  </script> --}}
 
 
 
