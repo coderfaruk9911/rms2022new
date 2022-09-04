@@ -68,10 +68,10 @@
                     </div>
 
                         <div class="row add_item">
-                            <div class="col-md-10">
+                            <div class="col-md-12">
+
                                 <div class="row">
-                                    
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_name">Product Name</label>
                                             <input type="text" id="product_name" name="product_name[]" value="{{old('product_name')}}" class="form-control">
@@ -85,34 +85,47 @@
                                             <input type="text" id="quantity" name="quantity[]" value="{{old('quantity')}}" class="form-control">
                                             </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="rate">Unit Price</label>
-                                            <input type="text" id="rate" name="unit_price[]"  class="form-control rate">
-                                        </div>  
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="box">Unit</label>
-                                            <input type="text" id="box" name="unit[]"  class="form-control box">
-                                        </div>  
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="amount">Price</label>
-                                            <input type="text" id="amount" name="price[]" class="form-control qty1 amount">
-                                        </div>  
-                                    </div>
-
-
                                     
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Unit Price</label>
+                                            <input type="text" id="qty_1" onkeyup="return qty(1)" name="unit_price[]"  class="form-control rate">
+                                        </div>  
+                                    </div>
 
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="price_1">Unit</label>
+                                            <input type="text" id="price_1" onkeyup="return price(1)" name="unit[]"  class="form-control">
+                                        </div>  
+                                    </div>
 
-                                    
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="text" id="subtotal_1" name="price[]" class="form-control subtotal">
+                                        </div>  
+                                    </div> 
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <div for="inputprice" class="text-center mt-2">Add More</div>
+                                            <a href="" class="btn btn-primary form-control addrow"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div> 
                                 </div>
+
+
+
+                                <div id="showItem"></div>
+                                <div class="col-md-12">
+                                  <hr>
+                                </div>
+
+
+
+
                             </div>
-                            <div class="col-md-2 ">
+                            {{-- <div class="col-md-2 ">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -120,14 +133,14 @@
                                             <a href="" class="btn btn-primary form-control addeventmore"><i class="fa fa-plus"></i></a>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="inputprice" class="text-danger">remove</label>
                                             <a href="" class="btn btn-danger form-control removeeventmore"><i class="fa fa-minus"></i></a>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                         </div>  
                         
@@ -135,8 +148,8 @@
                             <div class="col-md-6"> </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="inputprice">Total Amount</label>
-                                    <input type="text" name="total_amount" id="inputprice" class="form-control total">
+                                    <label for="totalamounval">Total Amount</label>
+                                    <input type="text" id="totalamounval" name="total_amount" class="form-control">
                                     </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -154,7 +167,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputprice">Due Amount</label>
-                                    <input type="text" name="due_amount" id="inputprice" class="form-control">
+                                    <input type="text" name="due_amount" id="due_amount" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2"> </div>
@@ -178,150 +191,136 @@
     <!-- /.content -->
   </div>
 
-  <div style="visibility: hidden;">
-    <div class="whole_extra_item_add" id="whole_extra_item_add">
-        <div class="delete_whole_extra_item_add" id="delete_whole_extra_item_add">
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="row">
-                        
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="product_name">Product Name</label>
-                                <input type="text" id="product_name" name="product_name[]" value="{{old('product_name')}}" class="form-control">
-                                </div>
-                        </div>
-                        
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="quantity">Quantity</label>
-                                <input type="text" id="quantity" name="quantity[]" value="{{old('quantity')}}" class="form-control">
-                                </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="rate">Unit Price</label>
-                                <input type="text" id="rate" name="unit_price[]" class="form-control rate">
-                            </div>  
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="unit">Unit</label>
-                                <input type="text" id="box" name="unit[]"  class="form-control box">
-                            </div>  
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="text" id="amount" name="price[]" value="{{old('price')}}" class="form-control qty1 amount">
-                            </div>  
-                        </div>
 
 
-                        
 
 
-                        
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="inputprice" class="">Add More</label>
-                                <a href="" class="btn btn-primary form-control addeventmore"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="inputprice" class="text-danger">remove</label>
-                                <a href="" class="btn btn-danger form-control removeeventmore"><i class="fa fa-minus"></i></a>
-                            </div>
-                        </div>
 
-
-                    </div>
-                </div>
-                
-            </div>  
-        </div>
-    </div>
-  </div>
-  
   <script src="{{asset('backend')}}/plugins/jquery/jquery.min.js"></script>
   <script>
-    $(document).ready(function(){
-        
-        var counter = 0;
-        $(document).on("click",".addeventmore", function(){
-            event.preventDefault();
-            var whole_extra_item_add = $("#whole_extra_item_add").html();
-            $(this).closest(".add_item").append(whole_extra_item_add);
-            counter++;
-        });
-        $(document).on("click",".removeeventmore",function(event){
-            event.preventDefault();
-            $(this).closest("#delete_whole_extra_item_add").remove();
-            counter -=1;
-        });
+    	/**When keyup qty Field this function Run*/
+	function qty(id)
+	{
+		var qty = $('#qty_'+id).val();
+		var price = $('#price_'+id).val();
+		var total = $('#totalamounval').val();
+		var result = Number(qty)*Number(price);
+		$('#subtotal_'+id).val(result);
+		total_price();
+	}
+	/**When keyup price Field this function Run*/
+	function price(id)
+	{
 
-    //     // Unit price multiply and send data to  price
+		var qty = $('#qty_'+id).val();
+		var price = $('#price_'+id).val();
+		var total = $('#totalamounval').val();
+		var result = Number(qty)*Number(price);
+		$('#subtotal_'+id).val(result);
+		var totalamount = Number(result)+Number(total);
+		$('#totalamounval').val(totalamount);
+		total_price();
+	}
+	/**call every keyup from any function*/
+	function total_price()
+	{
+		var total = 0;
+		$('input.subtotal').each(function() {
+				total +=Number($(this).val()); 
+		});
+		$('#totalamounval').val(total);
+	}
+/** due amount*/
+$(document).ready(function() {
+ $(function() {
+ $("#totalamounval, #paid_amount").on("keydown keyup", sub);
+ function sub() {
+ $("#due_amount").val(Number($("#totalamounval").val()) - Number($("#paid_amount").val()));
+ }
+ });    
 
-    $('.rate, .box').on('input',function(){
-    var rate = parseFloat($('.rate').val()) || 0;
-    var box = parseFloat($('.box').val()) || 0;
+ });
+    // function due_amount()
+	// {
+    //     // var total = $('#totalamounval').val();
+    //     // alert(total)
+	// 	// var paid =$('input#paid_amount').val();
+    //     // var due = total-paid;
+    //     // var due = Number(total)-Number(paid);
+	// 	// $('#due_amount').val(due);
+	// }
 
-    $('.amount').val(rate * box);  
+	/*Add Row Item*/
+	$(document).ready(function(){                      
+		var i = 1;
+		$('.addrow').click(function()
+			{
+                i++;
+				html ='';
+				html +='<div id="remove_'+i+'" class="row">';
+	            html +='<div class="col-md-3"><div class="form-group"><label for="product_name">Product Name</label><input type="text" id="product_name" name="product_name[]" class="form-control"></div></div>';
+	            html +='<div class="col-md-2"><div class="form-group"><label for="quantity">Quantity</label><input type="text" id="quantity" name="quantity[]" class="form-control"></div></div>';
+	            html +='<div class="col-md-2"><div class="form-group"><label>Unit Price</label><input type="text" id="qty_'+i+'" onkeyup="return qty('+i+')" name="unit_price[]" class="form-control"></div></div>';
+	            // html +='		<div class="col-md-2"><div class="form-group"><label>Unit Price</label><input type="text" id="qty_'+i+'" name="unit_price[]"  class="form-control"></div> </div>';
+	            html +='		<div class="col-md-2"><div class="form-group"><label for="price_1">Unit</label><input type="text" id="price_'+i+'" onkeyup="return price('+i+')" name="unit[]"  class="form-control"></div></div>';
+                html +='<div class="col-md-2"><div class="form-group"><label>Price</label><input type="text" id="subtotal_'+i+'" name="price[]" class="form-control subtotal"></div>  </div> ';
+                html +='		<div class="col-md-1"><div class="form-group"><div for="inputprice" class="text-center mt-2">remove</div><a href="" onclick="return remove('+i+')" class="btn btn-danger form-control "><i class="fa fa-minus"></i></a></div>';
+	            // html +='		<div class="col-md-2"><span class="btn btn-danger" onclick="return remove('+i+')"><i class="fa fa-times" aria-hidden="true"></i></span></div>';
+	            html +='	</div>';
+	            $('#showItem').append(html);
 
-
-    // $(document).on("change", ".qty1", function() {
-    //         event.preventDefault();
-    //         var sum = 0;
-    //         $(".qty1").each(function(){
-    //             sum += +$(this).val();
-    //         });
-    //         $(".total").val(sum);
-    //     });
-});
-        
-
-
-        // send data price to total price
-        // $(document).on("change", ".qty1", function() {
-        //     event.preventDefault();
-        //     var sum = 0;
-        //     $(".qty1").each(function(){
-        //         sum += +$(this).val();
-        //     });
-        //     $(".total").val(sum);
-        // });
-
-
-
-    });
-
-
+                event.preventDefault();
+			});
+            
+	});
+	function remove(id)
+	{
+        event.preventDefault();
+		$('#remove_'+id).remove();
+		total_price();
+	}
   </script>
 
 
 
+<script>
+$(document).ready(function() {
+    $("#disable").on("contextmenu",function(e){
+        return false;
+    }); 
+}); 
+</script>
 
-
-
-
-  {{-- <script>
-    $(document).ready(function(){
-    $('.a1').keyup(calculate);
-    $('.a2').keyup(calculate);
-});
-function calculate(e)
-{
-    $('.a3').val($('.a1').val() * $('.a2').val());
+<script>
+document.onkeydown = function(e) {
+        if (e.ctrlKey && 
+            (e.keyCode === 67 || 
+             e.keyCode === 86 || 
+             e.keyCode === 85 || 
+             e.keyCode === 117)) {
+            return false;
+        } else {
+            return true;
+        }
+};
+$(document).keypress("u",function(e) {
+  if(e.ctrlKey)
+  {
+return false;
 }
-  </script> --}}
+else
+{
+return true;
+}
+});
+</script>
 
+
+
+
+
+  
+ 
 
 
 @endsection
