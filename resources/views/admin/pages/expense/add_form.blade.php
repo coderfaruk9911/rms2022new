@@ -53,16 +53,28 @@
                 
                     <div class="card-body">
                         <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="invoice_number">Invoice Number</label>
                                 <input type="text" readonly id="invoice_number" name="invoice_number" value="{{$invoice_number}}" class="form-control">
                                 </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="invoice_date">Invoice Date</label>
                                 <input type="date" id="invoice_date" name="invoice_date" value="{{old('invoice_date')}}" class="form-control">
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Supllier Name:</label>
+                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                    <option value=""> Select Once</option>
+                                    <option value=""> N/A</option>
+                                    @foreach ($all_supplier as $row)
+                                    <option value="{{$row->id}}">{{$row->company_name}}</option>
+                                    @endforeach
+                                  </select>
                                 </div>
                         </div>
                     </div>
@@ -74,7 +86,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_name">Product Name</label>
-                                            <input type="text" id="product_name" name="product_name[]" value="{{old('product_name')}}" class="form-control">
+                                            <input type="text" id="search_1" name="product_name[]" onkeyup="return search_class"  class="form-control search_class typeahead">
                                             </div>
                                     </div>
                                     
@@ -114,33 +126,11 @@
                                     </div> 
                                 </div>
 
-
-
                                 <div id="showItem"></div>
                                 <div class="col-md-12">
                                   <hr>
                                 </div>
-
-
-
-
                             </div>
-                            {{-- <div class="col-md-2 ">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div for="inputprice" class="text-center mt-2">Add More</div>
-                                            <a href="" class="btn btn-primary form-control addeventmore"><i class="fa fa-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="inputprice" class="text-danger">remove</label>
-                                            <a href="" class="btn btn-danger form-control removeeventmore"><i class="fa fa-minus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                             
                         </div>  
                         
@@ -193,10 +183,14 @@
 
 
 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+  
 
 
 
-  <script src="{{asset('backend')}}/plugins/jquery/jquery.min.js"></script>
+
+
   <script>
     	/**When keyup qty Field this function Run*/
 	function qty(id)
@@ -230,25 +224,16 @@
 		});
 		$('#totalamounval').val(total);
 	}
-/** due amount*/
-$(document).ready(function() {
- $(function() {
- $("#totalamounval, #paid_amount").on("keydown keyup", sub);
- function sub() {
- $("#due_amount").val(Number($("#totalamounval").val()) - Number($("#paid_amount").val()));
- }
- });    
+    /** due amount*/
+    $(document).ready(function() {
+    $(function() {
+    $("#totalamounval, #paid_amount").on("keydown keyup", sub);
+    function sub() {
+    $("#due_amount").val(Number($("#totalamounval").val()) - Number($("#paid_amount").val()));
+    }
+    });    
 
- });
-    // function due_amount()
-	// {
-    //     // var total = $('#totalamounval').val();
-    //     // alert(total)
-	// 	// var paid =$('input#paid_amount').val();
-    //     // var due = total-paid;
-    //     // var due = Number(total)-Number(paid);
-	// 	// $('#due_amount').val(due);
-	// }
+    });
 
 	/*Add Row Item*/
 	$(document).ready(function(){                      
@@ -258,15 +243,13 @@ $(document).ready(function() {
                 i++;
 				html ='';
 				html +='<div id="remove_'+i+'" class="row">';
-	            html +='<div class="col-md-3"><div class="form-group"><label for="product_name">Product Name</label><input type="text" id="product_name" name="product_name[]" class="form-control"></div></div>';
+	            html +='<div class="col-md-3"><div class="form-group"><label for="product_name">Product Name</label><input type="text" id="search_'+i+'" name="product_name[]" onkeyup="return search_class" class="form-control search_class typeahead"></div></div>';
 	            html +='<div class="col-md-2"><div class="form-group"><label for="quantity">Quantity</label><input type="text" id="quantity" name="quantity[]" class="form-control"></div></div>';
 	            html +='<div class="col-md-2"><div class="form-group"><label>Unit Price</label><input type="text" id="qty_'+i+'" onkeyup="return qty('+i+')" name="unit_price[]" class="form-control"></div></div>';
-	            // html +='		<div class="col-md-2"><div class="form-group"><label>Unit Price</label><input type="text" id="qty_'+i+'" name="unit_price[]"  class="form-control"></div> </div>';
-	            html +='		<div class="col-md-2"><div class="form-group"><label for="price_1">Unit</label><input type="text" id="price_'+i+'" onkeyup="return price('+i+')" name="unit[]"  class="form-control"></div></div>';
+	            html +='<div class="col-md-2"><div class="form-group"><label for="price_1">Unit</label><input type="text" id="price_'+i+'" onkeyup="return price('+i+')" name="unit[]"  class="form-control"></div></div>';
                 html +='<div class="col-md-2"><div class="form-group"><label>Price</label><input type="text" id="subtotal_'+i+'" name="price[]" class="form-control subtotal"></div>  </div> ';
-                html +='		<div class="col-md-1"><div class="form-group"><div for="inputprice" class="text-center mt-2">remove</div><a href="" onclick="return remove('+i+')" class="btn btn-danger form-control "><i class="fa fa-minus"></i></a></div>';
-	            // html +='		<div class="col-md-2"><span class="btn btn-danger" onclick="return remove('+i+')"><i class="fa fa-times" aria-hidden="true"></i></span></div>';
-	            html +='	</div>';
+                html +='<div class="col-md-1"><div class="form-group"><div for="inputprice" class="text-center mt-2">remove</div><a href="" onclick="return remove('+i+')" class="btn btn-danger form-control "><i class="fa fa-minus"></i></a></div>';
+	            html +='</div>';
 	            $('#showItem').append(html);
 
                 event.preventDefault();
@@ -280,6 +263,116 @@ $(document).ready(function() {
 		total_price();
 	}
   </script>
+  
+
+{{-- search product name --}}
+
+{{-- <script>
+    var path = "{{ url('search-product')  }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { term: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+  </script> --}}
+
+
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <script type="text/javascript">
+
+    var path = "{{ route('search.product_name') }}";
+
+  
+
+    $( '.search_class').autocomplete({
+
+        source: function( request, response ) {
+
+          $.ajax({
+
+            url: path,
+
+            type: 'GET',
+
+            dataType: "json",
+
+            data: {
+
+               search: request.term
+
+            },
+
+            success: function( data ) {
+
+               response( data );
+
+            }
+
+          });
+
+        },
+
+        select: function (event, ui) {
+
+           $('.search_class').val(ui.item.label);
+
+           console.log(ui.item); 
+
+           return false;
+
+        }
+       
+      });
+
+  
+
+</script>
+
+
+
+
+<script>
+
+
+
+// var path = "{{ url('search-product') }}";
+
+// $('input.typeahead').typeahead({
+//     source: function (value, process){
+//     return $.get(path, { value: value}, function (data) {
+//         return process(toLowerCase(data));
+//     });
+//     }
+// });
+
+    // $(document).ready(function() {
+    //     $("#product_name").on("keyup",function(){
+    //         var value=  $(this).val();
+    //         $.ajax({
+    //             url:"{{ route('search.product_name')}}"
+    //             type:"GET"
+    //             data:{'product_name':value}
+    //             success:function(data){
+    //                 $($product_list).html(data)
+    //             }
+
+    //         });
+    //     }); 
+    // }); 
+    </script>
+
+
 
 
 

@@ -52,6 +52,10 @@ use App\Http\Controllers\test\Testcontroller;
     Route::get('/edit/{id}', [ExpenseInvoiceController::class, 'edit'])->name('expense_invoice.edit');
     Route::post('/update/{id}', [ExpenseInvoiceController::class, 'update'])->name('expense_invoice.update');
     Route::get('/delete/{id}', [ExpenseInvoiceController::class, 'delete'])->name('expense_invoice.delete');
+
+    // product name search
+    // Route::get('/search-product', [ExpenseInvoiceController::class, 'productNameSearch'])->name('search.product_name');
+    // Route::get('/search-product', [ExpenseInvoiceController::class, 'autocomplete'])->name('search.product_name');
     });
 
     /************************************************************
@@ -64,5 +68,8 @@ use App\Http\Controllers\test\Testcontroller;
     Route::post('/update/{id}', [StockProductListController::class, 'update'])->name('stock_product_list.update');
     Route::get('/delete/{id}', [StockProductListController::class, 'delete'])->name('stock_product_list.delete');
     });
+
+
+    Route::get('/search-product', [ExpenseInvoiceController::class, 'autocomplete'])->name('search.product_name');
     
 

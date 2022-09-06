@@ -12,6 +12,7 @@ class Expense extends Model
     protected $fillable = [
         'invoice_number',
         'invoice_date',
+        'supplier_id',
         'total_amount',
         'paid_amount',
         'due_amount',

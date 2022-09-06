@@ -15,8 +15,8 @@ class CreateStockproductlistsTable extends Migration
     {
         Schema::create('stockproductlists', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id')->nullable();
-            $table->string('product_name');
+            $table->string('product_name')->nullable();
+            $table->string('unit')->nullable();
             $table->timestamps();
         });
     }

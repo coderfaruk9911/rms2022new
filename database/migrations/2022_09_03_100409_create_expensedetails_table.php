@@ -15,6 +15,8 @@ class CreateExpensedetailsTable extends Migration
     {
         Schema::create('expensedetails', function (Blueprint $table) {
             $table->id();
+            $table->string('product_id')->nullable();
+            $table->string('expense_id')->nullable();
             $table->string('quantity');
             $table->string('unit_price');
             $table->string('unit');

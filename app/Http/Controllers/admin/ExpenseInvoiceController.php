@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Expense;
+use App\Models\Supplier;
 use App\Models\Stockproductlist;
 use App\Models\Expensedetails;
 
@@ -16,14 +17,40 @@ class ExpenseInvoiceController extends Controller
     }
 
     public function addForm(){
+        $all_supplier = Supplier::all();
         $lastInvoiceNumber = Expense::latest('invoice_number')->first();
         if($lastInvoiceNumber==null){
             $invoice_number = '000001';
         }else{
             $invoice_number = str_pad(($lastInvoiceNumber->invoice_number + 1),6, "0", STR_PAD_LEFT);
         }
-        return view('admin.pages.expense.add_form',compact('invoice_number'));
+        return view('admin.pages.expense.add_form',compact('invoice_number','all_supplier'));
     }
+
+    public function autocomplete(Request $request)
+
+    {
+
+        $data = Stockproductlist::select("product_name", "id")
+
+                    ->where('product_name', 'LIKE', '%'. $request->get('search'). '%')
+
+                    ->get();
+
+    
+
+        return response()->json($data);
+
+    }
+
+
+
+    // public function productNameSearch(Request $request ){
+    //     // $data = Stockproductlist::select('product_name')->where('product_name','LIKE',"%{$request->value}%")->get();
+    //     $data = Stockproductlist::where('product_name', 'like', "%{$request->term}%")
+    //     ->pluck('product_name');
+    //     return response()->json($data);
+    // }
 
 
     public function store(Request $request){
@@ -33,65 +60,77 @@ class ExpenseInvoiceController extends Controller
             'total_amount' => 'required|numeric|digits_between:1,10',
             'paid_amount' => 'required|numeric|digits_between:1,10',
             'due_amount' => 'required|numeric|digits_between:1,10',
-
-
-            'product_name' => 'required',
             'quantity' => 'required',
             'unit_price' => 'required',
             'unit' => 'required',
             'price' => 'required',
-
-
-
         ]);
 
         $data = new Expense();
 
         $data->invoice_number = $request->invoice_number;
         $data->invoice_date = $request->invoice_date;
+        $data->supplier_id = $request->supplier_id;
         $data->total_amount = $request->total_amount;
         $data->paid_amount = $request->paid_amount;
         $data->due_amount = $request->due_amount;
         $result = $data->save();
 
 
-
-        
-
-
-        // $stock = new Stockproductlist();
-        // $stock->product_name = $request->product_name;
-        // $stock->save();
-        // $test= $stock->product_name = $request->product_name;
-        // // $stock->save();
-        // Stockproductlist::insert($test[]);
-
-
-        // foreach ($request->product_name as $key=>$product) {
-        //     $saveData = [
-        //         'product_name' => $request->product_name[$key],
-        //     ];
-        //     DB::table('prod_com')->insert($saveData);
-        // }
-
-
         if ($result) {
-            foreach ($request->product_name as $key=>$product_name) {
+            foreach ($request->product_name as $key=>$product_name) { 
+                $allreadyHave = Stockproductlist::where('product_name',$request->product_name[$key])->first();
+                if($allreadyHave)
+                {
+                    $getproductid = Stockproductlist::where('product_name',$request->product_name[$key])->first(); 
+                    $productId = $getproductid->id;
+                    $sumUnit = Stockproductlist::where('id',$productId)->sum('unit');
+                    $getproductid->unit = $request->unit[$key]+$sumUnit;
+                    $getproductid->save();
+                }
+                else{
+                    $pName = new Stockproductlist();
+                    $pName->product_name = $request->product_name[$key];
+                    $pName->unit = $request->unit[$key];
+                    $done=$pName->save();
+                }     
+            }
             
+            foreach ($request->product_name as $key=>$product_name) {
+
+                $getproductid = Stockproductlist::where('product_name',$request->product_name[$key])->first(); 
+                $productId = $getproductid->id;
+
+
                 $eDetails = new Expensedetails();
                 $eDetails->quantity = $request->quantity[$key];
+                $eDetails->product_id = $productId;
+                $eDetails->expense_id = $request->invoice_number;
                 $eDetails->unit_price = $request->unit_price[$key];
                 $eDetails->unit = $request->unit[$key];
                 $eDetails->price = $request->price[$key];
                 $done=$eDetails->save(); 
             }
 
-            foreach ($request->product_name as $key=>$product_name) {
+
+
+            // foreach ($request->product_name as $key=>$product_name) { 
+            //     $allreadyHave = Stockproductlist::where('product_name',$request->product_name[$key])->first();
+            //     if($allreadyHave)
+            //     {
+            //         $getproductid = Stockproductlist::where('product_name',$request->product_name[$key])->first(); 
+            //         $productId = $getproductid->id;
+            //         $getproductid->unit = $request->unit[$key];
+            //         $getproductid->save();
+
+            //     }else{
+            //         $pName = new Stockproductlist();
+            //         $pName->product_name = $request->product_name[$key];
+            //         $done=$pName->save();
+            //     }     
+            // }
+
             
-                $pName = new Stockproductlist();
-                $pName->product_name = $request->product_name[$key];
-                $done=$pName->save(); 
-            }
 
 
             $notification = array(

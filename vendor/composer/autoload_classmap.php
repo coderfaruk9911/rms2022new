@@ -34,6 +34,7 @@ return array(
     'App\\Models\\Expensedetails' => $baseDir . '/app/Models/Expensedetails.php',
     'App\\Models\\Stockproductlist' => $baseDir . '/app/Models/Stockproductlist.php',
     'App\\Models\\Supplier' => $baseDir . '/app/Models/Supplier.php',
+    'App\\Models\\Supplierdue' => $baseDir . '/app/Models/Supplierdue.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

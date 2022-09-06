@@ -600,6 +600,7 @@ class ComposerStaticInit7fac41116ed6edeba7059c8ebe121ce5
         'App\\Models\\Expensedetails' => __DIR__ . '/../..' . '/app/Models/Expensedetails.php',
         'App\\Models\\Stockproductlist' => __DIR__ . '/../..' . '/app/Models/Stockproductlist.php',
         'App\\Models\\Supplier' => __DIR__ . '/../..' . '/app/Models/Supplier.php',
+        'App\\Models\\Supplierdue' => __DIR__ . '/../..' . '/app/Models/Supplierdue.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
