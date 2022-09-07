@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\{UserManagementController,SupplierController,
-    ExpenseInvoiceController,StockProductListController};
+    ExpenseInvoiceController,StockProductListController,ProductExpenseController,
+    ProductLimitController};
 use App\Http\Controllers\test\Testcontroller;
 
 
@@ -28,6 +29,17 @@ use App\Http\Controllers\test\Testcontroller;
     Route::post('/update/{id}', [UserManagementController::class, 'update'])->name('user_management.update');
     Route::get('/delete/{id}', [UserManagementController::class, 'delete'])->name('user_management.delete');
     Route::get('/profile/{id}', [UserManagementController::class, 'AdminProfile'])->name('admin.profile');
+    });
+
+    /************************************************************
+     ***          Product Limit Route Are Here               ***
+     ************************************************************/
+    Route::prefix('product-limit')->middleware('auth')->group(function () {
+    Route::get('/view', [ProductLimitController::class, 'view'])->name('product_limit.view');
+    Route::post('/store', [ProductLimitController::class, 'store'])->name('product_limit.store');
+    Route::get('/edit/{id}', [ProductLimitController::class, 'edit'])->name('product_limit.edit');
+    Route::post('/update/{id}', [ProductLimitController::class, 'update'])->name('product_limit.update');
+    Route::get('/delete/{id}', [ProductLimitController::class, 'delete'])->name('product_limit.delete');
     });
 
 
@@ -67,6 +79,18 @@ use App\Http\Controllers\test\Testcontroller;
     Route::get('/edit/{id}', [StockProductListController::class, 'edit'])->name('stock_product_list.edit');
     Route::post('/update/{id}', [StockProductListController::class, 'update'])->name('stock_product_list.update');
     Route::get('/delete/{id}', [StockProductListController::class, 'delete'])->name('stock_product_list.delete');
+    });
+
+    /************************************************************
+     ***          Kitchen Provide Route Are Here              ***
+     ************************************************************/
+    Route::prefix('kitchen-product-provide')->middleware('auth')->group(function () {
+    Route::get('/view', [ProductExpenseController::class, 'view'])->name('kitchen_product_provide.view');
+    Route::get('/add-form', [ProductExpenseController::class, 'addForm'])->name('kitchen_product_provide.add_form');
+    Route::post('/store', [ProductExpenseController::class, 'store'])->name('kitchen_product_provide.store');
+    Route::get('/edit/{id}', [ProductExpenseController::class, 'edit'])->name('kitchen_product_provide.edit');
+    Route::post('/update/{id}', [ProductExpenseController::class, 'update'])->name('kitchen_product_provide.update');
+    Route::get('/delete/{id}', [ProductExpenseController::class, 'delete'])->name('kitchen_product_provide.delete');
     });
 
 

@@ -46,6 +46,32 @@
               </li>
               @endif
 
+            <!-- Product Limit Section -->
+            @if ( Auth::user()->role == 'admin' || Auth::user()->role == 'buyer')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-gift"></i>
+                <p>
+                  Product Limit Section
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+  
+                <li class="nav-item">
+                  <a href="{{route('product_limit.view')}}" class="nav-link">
+                    <i class="fa fa-eye nav-icon"></i>
+                    <p>Product Limit List</p>
+                  </a>
+                </li>
+  
+              </ul>
+            </li>
+            @endif
+            <!-- End Product Limit Section -->
+
+
+
 
           <!-- Buyer Section -->
           @if ( Auth::user()->role == 'admin' || Auth::user()->role == 'buyer')
@@ -83,6 +109,33 @@
           </li>
           @endif
           <!-- End Buyer Section -->
+
+          <!-- Kitchen Section -->
+          @if ( Auth::user()->role == 'admin' || Auth::user()->role == 'buyer')
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-gift"></i>
+              <p>
+                Kitchen Section
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{route('kitchen_product_provide.view')}}" class="nav-link">
+                  <i class="fa fa-eye nav-icon"></i>
+                  <p>Provided Product List</p>
+
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          @endif
+          <!-- End Kitchen Section -->
+
+
 
            <!-- Seller Section -->
            @if ( Auth::user()->role == 'admin' || Auth::user()->role == 'seller')
