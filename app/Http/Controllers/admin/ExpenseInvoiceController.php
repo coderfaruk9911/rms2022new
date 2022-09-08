@@ -31,17 +31,57 @@ class ExpenseInvoiceController extends Controller
 
     {
 
-        $data = Stockproductlist::select("product_name", "id")
 
-                    ->where('product_name', 'LIKE', '%'. $request->get('search'). '%')
 
-                    ->get();
+        if ($request->ajax()) {
+            $data = Stockproductlist::where('product_name','LIKE',$request->product_name.'%')->get();
+            $output = '';
+            if (count($data)>0) {
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 99999">';
+                foreach ($data as $row) {
+                    $output .= '<li class="list-group-item">'.$row->product_name.'</li>';
+                }
+                $output .= '</ul>';
+            }else {
+                $output .= '<li class="list-group-item">'.'No Data Found'.'</li>';
+            }
+            return $output;
+        }
+        return view('admin.pages.expense.add_form');  
+    }
+
+        // $data = Stockproductlist::select("product_name", "id")
+
+        //             ->where('product_name', 'LIKE', '%'. $request->get('search'). '%')
+
+        //             ->get();
 
     
 
-        return response()->json($data);
+        // return response()->json($data);
 
-    }
+
+
+        // $movies = [];
+
+
+        // if($request->has('q')){
+
+        //     $search = $request->q;
+
+        //     $movies =Stockproductlist::select("id", "product_name")
+
+        //             ->where('product_name', 'LIKE', "%$search%")
+
+        //             ->get();
+
+        // }
+
+        // return response()->json($movies);
+
+  
+
+    // }
 
 
 

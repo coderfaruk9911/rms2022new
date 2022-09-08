@@ -86,8 +86,11 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_name">Product Name</label>
-                                            <input type="text" id="search_1" name="product_name[]" onkeyup="return search_class"  class="form-control search_class typeahead">
+                                            <input type="text" id="product_name" name="product_name[]"   class="form-control">
+                                            <div id="product_list"></div>
                                             </div>
+
+                                            
                                     </div>
                                     
         
@@ -184,10 +187,52 @@
 
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-  
 
+{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+
+    $('.livesearch').select2({
+
+        placeholder: 'Select Name',
+
+        ajax: {
+
+            url: '{{route("search.product_name")}}',
+
+            dataType: 'json',
+
+            delay: 250,
+
+            processResults: function (data) {
+
+                return {
+
+                    results: $.map(data, function (item) {
+
+                        return {
+
+                            text: item.product_name,
+
+                            id: item.id
+
+                        }
+
+                    })
+
+                };
+
+            },
+
+            cache: true
+
+        }
+
+    });
+
+</script> --}}
 
 
 
@@ -243,7 +288,7 @@
                 i++;
 				html ='';
 				html +='<div id="remove_'+i+'" class="row">';
-	            html +='<div class="col-md-3"><div class="form-group"><label for="product_name">Product Name</label><input type="text" id="search_'+i+'" name="product_name[]" onkeyup="return search_class" class="form-control search_class typeahead"></div></div>';
+	            html +='<div class="col-md-3"><div class="form-group"><label for="product_name">Product Name</label><input type="text" name="product_name[]"  class="form-control livesearch"></div></div>';
 	            html +='<div class="col-md-2"><div class="form-group"><label for="quantity">Quantity</label><input type="text" id="quantity" name="quantity[]" class="form-control"></div></div>';
 	            html +='<div class="col-md-2"><div class="form-group"><label>Unit Price</label><input type="text" id="qty_'+i+'" onkeyup="return qty('+i+')" name="unit_price[]" class="form-control"></div></div>';
 	            html +='<div class="col-md-2"><div class="form-group"><label for="price_1">Unit</label><input type="text" id="price_'+i+'" onkeyup="return price('+i+')" name="unit[]"  class="form-control"></div></div>';
@@ -263,6 +308,31 @@
 		total_price();
 	}
   </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#product_name').on('keyup',function () {
+            var query = $(this).val();
+            $.ajax({
+                url:'{{ route('search.product_name') }}',
+                type:'GET',
+                data:{'product_name':query},
+                success:function (data) {
+                    $('#product_list').html(data);
+                }
+            })
+        });
+        $(document).on('click', 'li', function(){
+            var value = $(this).text();
+            $('#product_name').val(value);
+            $('#product_list').html("");
+        });
+    });
+</script>   
+
+
+
   
 
 {{-- search product name --}}
@@ -283,7 +353,13 @@
 
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  
+
+
+
+
+
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -337,7 +413,7 @@
 
   
 
-</script>
+</script> --}}
 
 
 
